@@ -1,0 +1,64 @@
+<?php echo $this->getContent(); ?>
+
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100 ver1 m-b-110">
+                <table data-vertable="ver1">
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1"></th>
+                        <?php foreach ($users as $user){?>
+                        <th class="column100 column2" data-column="column2"><?php echo  $user->name?></th>
+                        <?php }?>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="row100">
+                        <td class="column100 column1" data-column="column1">monday</td>
+
+                        <td class="column100 column2" data-column="column2">
+                            <!--test data-->
+                            <?php foreach ($timerStart as $item){?>
+                                <span><?php echo  $item->time ?>-</span>
+                            <?php }?>
+                            <?php foreach ($timerStop as $item){?>
+                                <span><?php echo  $item->time ?><br></span>
+                            <?php }?>
+                        </td>
+                        <td class="column100 column3" data-column="column3">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                        <td class="column100 column4" data-column="column4">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                        <td class="column100 column5" data-column="column5">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                        <td class="column100 column6" data-column="column6">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                        <td class="column100 column7" data-column="column7">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                        <td class="column100 column8" data-column="column8">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--            form time-->
+            <?php
+            echo $this->tag->form(
+                [
+                    "index/timer",
+                    "autocomplete" => "off",
+                    "class" => "form-horizontal"
+                ]
+            );
+            ?>
+            <?php echo $time_start?>
+            <?php echo $this->tag->hiddenField(["user_id","type" => "hidden","value"=> $user->id, "class" => "form-control", "id" => "fieldType"]) ?>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button value="start" name="time" type="submit" class="btn btn-success" onclick="hideAccept()">Start</button>
+                    <button value="stop" name="time" type="submit" class="btn btn-success" onclick="hideAccept()">Stop</button>
+                </div>
+            </div>
+            <?php echo $this->tag->endForm(); ?>
+
+        </div>
+    </div>
+</div>
+
+
+
