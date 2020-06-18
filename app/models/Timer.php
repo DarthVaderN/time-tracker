@@ -2,7 +2,6 @@
 
 class Timer extends \Phalcon\Mvc\Model
 {
-
     /**
      *
      * @var integer
@@ -26,6 +25,11 @@ class Timer extends \Phalcon\Mvc\Model
      * @var string
      */
     public $time;
+    /**
+     *
+     * @var string
+     */
+    public $stop;
 
 //    /**getId
 //     * Initialize method for model.
@@ -36,9 +40,9 @@ class Timer extends \Phalcon\Mvc\Model
     {
         $this->setSchema("timer");
         $this->setSource("timer");
-        $this->belongsTo('user_id', Users::class, 'id');
 
-
+        $this->belongsTo('user_id', Users::class, 'id',[
+            'alias' => 'user']);
     }
 
     /**
@@ -93,5 +97,6 @@ class Timer extends \Phalcon\Mvc\Model
 
         return $result;
     }
+
 
 }

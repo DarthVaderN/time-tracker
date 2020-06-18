@@ -9,20 +9,18 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
         $this->view->users = Users::find();
-        //display start time test
-        $this->view->timerStart = Timer::getTimer(1);
-        //display end time test
-        $this->view->timerStop = Timer::getTimer(0);
+        $this->view->timerStart = Timer::find();
+
+
 
     }
-
     //send to database time , id , user_id , state
     public function timerAction()
     {
         if ($_POST['time'] === 'start') {
         $timer = new Timer();
         $timer->user_id = $this->request->getPost("user_id");
-        $timer->state = 0;
+        $timer->state = 'start';
         $timer->time = $timer->getTime();
 
         if (!$timer->save()) {
@@ -39,7 +37,7 @@ class IndexController extends ControllerBase
         if ($_POST['time'] === 'stop') {
             $timer = new Timer();
             $timer->user_id = $this->request->getPost("user_id");
-            $timer->state = 1;
+            $timer->state = 'stop';
             $timer->time = $timer->getTime();
 
             if (!$timer->save()) {

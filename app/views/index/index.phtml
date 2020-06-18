@@ -16,27 +16,21 @@
                     <tbody>
                     <tr class="row100">
                         <td class="column100 column1" data-column="column1">monday</td>
-
-                        <td class="column100 column2" data-column="column2">
-                            <!--test data-->
-                            <?php foreach ($timerStart as $item){?>
-                                <span><?php echo  $item->time ?>-</span>
-                            <?php }?>
-                            <?php foreach ($timerStop as $item){?>
-                                <span><?php echo  $item->time ?><br></span>
-                            <?php }?>
-                        </td>
-                        <td class="column100 column3" data-column="column3">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
-                        <td class="column100 column4" data-column="column4">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
-                        <td class="column100 column5" data-column="column5">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
-                        <td class="column100 column6" data-column="column6">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
-                        <td class="column100 column7" data-column="column7">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
-                        <td class="column100 column8" data-column="column8">5:00 PM<br> 8:00 PM <br> 8:00 PM<br> 12:40 PM</td>
+                        <?php foreach ($users as $item){?>
+                            <td class="column100 column2" data-column="column2">
+                                <?php foreach ($item->timer as $time){?>
+                                    <?php if($time->state === 'start') {?>
+                                        <span class="start"><?php echo $time->time ?> -</span>
+                                    <?php }else{ ?>
+                                        <span class="stop" ><?php echo $time->time ?></span>
+                                    <?php }?>
+                                <?php }?>
+                            </td>
+                        <?php }?>
                     </tr>
                     </tbody>
                 </table>
             </div>
-<!--            form time-->
             <?php
             echo $this->tag->form(
                 [
@@ -50,15 +44,36 @@
             <?php echo $this->tag->hiddenField(["user_id","type" => "hidden","value"=> $user->id, "class" => "form-control", "id" => "fieldType"]) ?>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button value="start" name="time" type="submit" class="btn btn-success" onclick="hideAccept()">Start</button>
-                    <button value="stop" name="time" type="submit" class="btn btn-success" onclick="hideAccept()">Stop</button>
+                    <button value="start" name="time" type="submit" class="btn btn-success" id="button1" onclick="SwitchButtons('button2');">Start</button>
+                    <button value="stop" name="time" type="submit" class="btn btn-success" id="button2" onclick="SwitchButtons('button1');">Stop</button>
                 </div>
             </div>
             <?php echo $this->tag->endForm(); ?>
 
+
         </div>
     </div>
 </div>
+<script>
+    function SwitchButtons(buttonId) {
+        var hideBtn, showBtn, menuToggle;
+        if (buttonId == 'button1') {
+            menuToggle = 'menu2';
+            showBtn = 'button2';
+            hideBtn = 'button1';
+        } else {
+            menuToggle = 'menu3';
+            showBtn = 'button1';
+            hideBtn = 'button2';
+        }
+        //I don't have your menus, so this is commented out.  just uncomment for your usage
+        // document.getElementById(menuToggle).toggle(); //step 1: toggle menu
+        document.getElementById(hideBtn).style.display = 'none'; //step 2 :additional feature hide button
+        document.getElementById(showBtn).style.display = ''; //step 3:additional feature show button
 
+
+    }
+
+</script>
 
 

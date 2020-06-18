@@ -18,7 +18,23 @@ class Users extends Model
 
     public function initialize()
     {
-        $this->hasMany('id', Timer::class, 'user_id');
+
+        $this->setSchema("timer");
+        $this->setSource("users");
+        $this->hasMany('id', Timer::class, 'user_id',[
+            'alias' => 'timer',
+            'reusable' => true
+        ]);
+        $this->belongsTo('prof_id',Profiles::class, 'id', [
+            'alias' => 'profile',
+            'reusable' => true
+        ]);
+
     }
+
+
+
+
+
 
 }
