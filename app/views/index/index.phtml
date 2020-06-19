@@ -19,11 +19,11 @@
                         <?php foreach ($users as $item){?>
                             <td class="column100 column2" data-column="column2">
                                 <?php foreach ($item->timer as $time){?>
-                                    <?php if($time->state === 'start') {?>
+
                                         <span class="start"><?php echo $time->time ?> -</span>
-                                    <?php }else{ ?>
-                                        <span class="stop" ><?php echo $time->time ?></span>
-                                    <?php }?>
+
+                                        <span class="stop" ><?php echo $time->stop ?></span>
+
                                 <?php }?>
                             </td>
                         <?php }?>

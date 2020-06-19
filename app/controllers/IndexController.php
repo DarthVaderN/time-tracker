@@ -35,17 +35,12 @@ class IndexController extends ControllerBase
         }
 
         if ($_POST['time'] === 'stop') {
-            $timer = new Timer();
-            $timer->user_id = $this->request->getPost("user_id");
-            $timer->state = 'stop';
-            $timer->time = $timer->getTime();
-
-            if (!$timer->save()) {
-                foreach ($timer->getMessages() as $message) {
-                    $this->flash->error($message);
+            $timer =  Timer::find();
+            foreach ($timer as $package) {
+                if($package->stop == null ){
+                $package->stop = $package->getTime();
+                    $package->update();
                 }
-                $this->flash->error($message);
-                return $this->response->redirect('index/index');
             }
             $this->flash->success("timer was created successfully");
             return $this->response->redirect('index/index');
