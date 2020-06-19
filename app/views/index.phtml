@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <title>Table V03</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Time tracker</title>
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/timer/bootstrap/css/bootstrap.min.css">
@@ -19,20 +18,46 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/timer/css/util.css">
     <link rel="stylesheet" type="text/css" href="/timer/css/main.css">
-    <!--===============================================================================================-->
+
+
+
 </head>
 <body>
-            <?php echo $this->getContent(); ?>
-        <!-- jQuery first, then Popper.js, and then Bootstrap's JavaScript -->
-        <!--===============================================================================================-->
-        <script src="/timer/jquery/jquery-3.2.1.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="/timer/bootstrap/js/popper.min.js"></script>
-        <script src="/timer/bootstrap/js/bootstrap.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="/timer/select2/select2.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="/timer/js/main.js"></script>
+<?php echo $this->getContent(); ?>
+
+
+
+<!-- jQuery first, then Popper.js, and then Bootstrap's JavaScript -->
+<!--===============================================================================================-->
+<script src="/timer/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/timer/bootstrap/js/popper.min.js"></script>
+<script src="/timer/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/timer/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="/timer/js/main.js"></script>
+
+<div class="clear"></div>
+<br/>
+<br/>
+<br/>
+<br/>
+</div>
+</div>
+<input type="hidden" name="month" value="06"/>
+<input type="hidden" name="year" value="2020"/>
+
+
+<style>
+    #parent {
+        height: 350px;
+    }
+
+    #fixTable {
+        width: 1800px !important;
+    }
+</style>
 
 </body>
 </html>

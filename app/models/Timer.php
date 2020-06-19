@@ -2,6 +2,7 @@
 
 class Timer extends \Phalcon\Mvc\Model
 {
+
     /**
      *
      * @var integer
@@ -25,15 +26,12 @@ class Timer extends \Phalcon\Mvc\Model
      * @var string
      */
     public $time;
+
     /**
      *
      * @var string
      */
     public $stop;
-
-//    /**getId
-//     * Initialize method for model.
-//     */
 
     // relationships one to many
     public function initialize()
@@ -58,7 +56,8 @@ class Timer extends \Phalcon\Mvc\Model
     public function getTime()
     {
         date_default_timezone_set('Asia/Bishkek');
-        $time_start = date('H:i');
+        $time = new \DateTime();
+        $time_start = $time->format('Y-m-d H:i:s');
         return $time_start;
     }
 
@@ -97,6 +96,4 @@ class Timer extends \Phalcon\Mvc\Model
 
         return $result;
     }
-
-
 }

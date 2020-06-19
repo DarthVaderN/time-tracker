@@ -20,7 +20,7 @@ class IndexController extends ControllerBase
         if ($_POST['time'] === 'start') {
         $timer = new Timer();
         $timer->user_id = $this->request->getPost("user_id");
-        $timer->state = 'start';
+        $timer->state = '1';
         $timer->time = $timer->getTime();
 
         if (!$timer->save()) {
@@ -39,7 +39,7 @@ class IndexController extends ControllerBase
             foreach ($timer as $package) {
                 if($package->stop == null ){
                 $package->stop = $package->getTime();
-                    $package->update();
+                $package->update();
                 }
             }
             $this->flash->success("timer was created successfully");
