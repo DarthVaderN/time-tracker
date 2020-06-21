@@ -32,6 +32,21 @@ class Timer extends \Phalcon\Mvc\Model
      * @var string
      */
     public $stop;
+    /**
+     *
+     * @var string
+     */
+    public $day;
+    /**
+     *
+     * @var string
+     */
+    public $month;
+    /**
+     *
+     * @var string
+     */
+    public $year;
 
     // relationships one to many
     public function initialize()
@@ -56,10 +71,11 @@ class Timer extends \Phalcon\Mvc\Model
     public function getTime()
     {
         date_default_timezone_set('Asia/Bishkek');
-        $time = new \DateTime();
-        $time_start = $time->format('Y-m-d H:i:s');
+        $time = new DateTime();
+        $time_start = $time->format('H:i');
         return $time_start;
     }
+
 
     /**
      * Allows to query a set of records that match the specified conditions

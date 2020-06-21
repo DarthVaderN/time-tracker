@@ -90,16 +90,16 @@
                                 <div style="display: inline;" data-type=" test">
                                     <input class="full_day_checkbox_11"
                                            id="day_1" disabled="disabled" value="1" type="checkbox">
-                                    <br>
-
-
                                     <?php foreach ($item->timer as $time) { ?>
                                         <center><?php echo $time->time ?> - <?php echo $time->stop ?></center>
                                     <?php } ?>
-                                    <center>
-                                        <span class="my_total_time" style="color: green;">20<?php $item->timer->stop; ?></span>
-                                    </center>
-
+                                    <?php $sum = 0;?>
+                                    <?php foreach ($item->timer as $time) { ?>
+                                       <?php $sum += $time->total_time; ?>
+                                    <?php } ?>
+                                    <?php if($sum > 0){ ?>
+                                    <center><?php echo   round($sum/60,2) ; ?> </center>
+                                    <?php } ?>
 
 
                                 </div>
