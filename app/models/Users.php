@@ -23,7 +23,13 @@ class Users extends Model
         $this->setSource("users");
         $this->hasMany('id', Timer::class, 'user_id',[
             'alias' => 'timer',
-            'reusable' => true
+            'reusable' => true, // additional parameters like where, order, limit etc...
+            'params' => [
+                'order' => 'time ASC',
+//                'bind' => [
+//                    'type' => get_class($this)
+//                ]
+            ]
         ]);
         $this->belongsTo('prof_id',Profiles::class, 'id', [
             'alias' => 'profile',

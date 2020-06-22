@@ -72,7 +72,7 @@ class Timer extends \Phalcon\Mvc\Model
     {
         date_default_timezone_set('Asia/Bishkek');
         $time = new DateTime();
-        $time_start = $time->format('H:i');
+        $time_start = $time->format('Y-m-d H:i:s');
         return $time_start;
     }
 
@@ -89,6 +89,8 @@ class Timer extends \Phalcon\Mvc\Model
     }
 
 
+
+
     /**
      * Allows to query the first record that match the specified conditions
      *
@@ -100,16 +102,16 @@ class Timer extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters = null);
     }
     // test get time for view where state 1(end time) or 0(start time) ;
-    public static function getTimer($parameters)
-    {
-        $di = Phalcon\DI\FactoryDefault::getDefault()->get('modelsManager')
-            ->createBuilder();
-
-        $result = $di
-            ->from('timer')->where('timer.state = '.$parameters)
-            ->getQuery()
-            ->execute();
-
-        return $result;
-    }
+//    public static function getTimer($parameters)
+//    {
+//        $di = Phalcon\DI\FactoryDefault::getDefault()->get('modelsManager')
+//            ->createBuilder();
+//
+//        $result = $di
+//            ->from('timer')->where('timer.state = '.$parameters)
+//            ->getQuery()
+//            ->execute();
+//
+//        return $result;
+//    }
 }

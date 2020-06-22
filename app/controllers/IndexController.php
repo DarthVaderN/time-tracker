@@ -42,10 +42,10 @@ class IndexController extends ControllerBase
                 if($stop_timer->stop == null ){
                 $stop_timer->stop = $stop_timer->getTime();
                     $datetime1 = new DateTime($stop_timer->time);
-                    $datetime2 = new DateTime();
+                    $datetime2 = new DateTime($stop_timer->getTime());
                     $interval = $datetime1->diff($datetime2);
-                    $diff_total = $interval->format('%i');
-                    $stop_timer->total_time = (int)$diff_total;
+                    $diff_total = $interval->format('%H:%I:%S');
+                    $stop_timer->total_time = $diff_total;
                 $stop_timer->update();
                 }
             }
