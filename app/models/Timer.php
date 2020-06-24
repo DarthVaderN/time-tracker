@@ -72,7 +72,7 @@ class Timer extends \Phalcon\Mvc\Model
     {
         date_default_timezone_set('Asia/Bishkek');
         $time = new DateTime();
-        $time_start = $time->format('Y-m-d H:i:s');
+        $time_start = $time->format('H:i:s');
         return $time_start;
     }
 
