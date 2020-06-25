@@ -68,4 +68,5 @@ class Holiday extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
+
 }

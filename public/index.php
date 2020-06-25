@@ -37,7 +37,7 @@ $di['view'] = function () {
 // Setup a base URI so that all generated URIs include the "tutorial" folder
 $di['url'] = function () {
     $url = new UrlProvider();
-    $url->setBaseUri('/timer/');
+    $url->setBaseUri('/time-tracker/');
     return $url;
 };
 
@@ -61,12 +61,28 @@ $di->setShared(
     'session',
     function () {
         $session = new Session();
-
         $session->start();
-
         return $session;
     }
 );
+$di->setShared('AclResources', function() {
+    $pr = [];
+    if (is_readable(APP_PATH . '/config/privateResources.php')) {
+        $pr = include APP_PATH . '/config/privateResources.php';
+    }
+    return $pr;
+});
+/**
+ * Access Control List
+ * Reads privateResource as an array from the config object.
+ */
+$di->set('acl', function () {
+    $acl = new Acl();
+    $pr = $this->getShared('AclResources')->privateResources->toArray();
+    $acl->addPrivateResources($pr);
+    return $acl;
+});
+
 function print_arr( $var, $return = false )
 {
     $type = gettype( $var );

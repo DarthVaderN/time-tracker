@@ -28,8 +28,11 @@ class Profiles extends \Phalcon\Mvc\Model
     {
         $this->setSchema("timer");
         $this->setSource("profiles");
-        $this->hasMany('id', Users::class, 'prof_Id', [
+        $this->hasMany('id', Users::class, 'profiles_id', [
             'alias' => 'users',
+            'foreignKey' => [
+                'message' => 'Profile cannot be deleted because it\'s used on Users'
+            ]
         ]);
     }
 
