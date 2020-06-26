@@ -5,12 +5,13 @@
  */
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
+preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]);
+
 
 return new \Phalcon\Config([
     'database' => [
         'adapter'     => 'Mysql',
         'host'        => 'localhost',
-        'port'        =>  8889,
         'username'    => 'root',
         'password'    => 'root',
         'dbname'      => 'timer',
@@ -25,7 +26,6 @@ return new \Phalcon\Config([
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
-        'baseUri'        => '/timer/',
+        'baseUri'        => '/time-tracker/',
     ]
 ]);
-

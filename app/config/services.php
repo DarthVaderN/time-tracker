@@ -8,6 +8,7 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
+use Timer\Acl\Acl;
 
 /**
  * Shared configuration service
@@ -101,7 +102,24 @@ $di->set('flash', function () {
         'warning' => 'alert alert-warning'
     ]);
 });
+$di->setShared('AclResources', function() {
+    $pr = [];
+    if (is_readable(APP_PATH . '/config/privateResources.php')) {
+        $pr = include APP_PATH . '/config/privateResources.php';
+    }
+    return $pr;
+});
 
+/**
+ * Access Control List
+ * Reads privateResource as an array from the config object.
+ */
+$di->set('acl', function () {
+    $acl = new Acl();
+    $pr = $this->getShared('AclResources')->privateResources->toArray();
+    $acl->addPrivateResources($pr);
+    return $acl;
+});
 /**
  * Start the session the first time some component request the session service
  */

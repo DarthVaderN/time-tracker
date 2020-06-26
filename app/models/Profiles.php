@@ -1,5 +1,7 @@
 <?php
 
+use Phalcon\Mvc\Model\Relation;
+
 class Profiles extends \Phalcon\Mvc\Model
 {
 
@@ -32,6 +34,12 @@ class Profiles extends \Phalcon\Mvc\Model
             'alias' => 'users',
             'foreignKey' => [
                 'message' => 'Profile cannot be deleted because it\'s used on Users'
+            ]
+        ]);
+        $this->hasMany('id', Permissions::class, 'profiles_id', [
+            'alias' => 'permissions',
+            'foreignKey' => [
+                'action' => Relation::ACTION_CASCADE
             ]
         ]);
     }

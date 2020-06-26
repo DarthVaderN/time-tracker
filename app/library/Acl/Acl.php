@@ -16,7 +16,7 @@
 */
 
 
-
+namespace Timer\Acl;
 
 use Phalcon\Mvc\User\Component;
 use Phalcon\Acl\Role as AclRole;

@@ -1,65 +1,21 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Time tracker</title>
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/timer/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/timer/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/timer/css/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/timer/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/timer/perfect-scrollbar/perfect-scrollbar.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/timer/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/timer/css/main.css">
-
-
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Phalcon PHP Framework</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->url->get('img/favicon.ico')?>"/>
 </head>
 <body>
 <div class="container">
-<?php echo $this->getContent(); ?>
+    <?php echo $this->getContent(); ?>
 </div>
-
-
-
 <!-- jQuery first, then Popper.js, and then Bootstrap's JavaScript -->
-<!--===============================================================================================-->
-<script src="/timer/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="/timer/bootstrap/js/popper.min.js"></script>
-<script src="/timer/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="/timer/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="/timer/js/main.js"></script>
-
-<div class="clear"></div>
-<br/>
-<br/>
-<br/>
-<br/>
-</div>
-</div>
-<input type="hidden" name="month" value="06"/>
-<input type="hidden" name="year" value="2020"/>
-
-
-<style>
-    #parent {
-        height: 350px;
-    }
-
-    #fixTable {
-        width: 1800px !important;
-    }
-</style>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

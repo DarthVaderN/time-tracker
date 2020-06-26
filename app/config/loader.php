@@ -6,13 +6,17 @@ $loader = new \Phalcon\Loader();
  * We're a registering a set of directories taken from the configuration file
  */
 $loader->registerDirs([
-    APP_PATH . $config->application->controllersDir,
-    APP_PATH . $config->application->pluginsDir,
-    APP_PATH . $config->application->libraryDir,
-    APP_PATH . $config->application->modelsDir,
-    APP_PATH . $config->application->formsDir
-])->register();
+                    $config->application->controllersDir,
+//                    $config->application->libraryDir,
+                    $config->application->modelsDir,
 
-$loader->registerClasses([
-    'Services' => APP_PATH . 'app/Services.php'
 ]);
+$loader->registerNamespaces([
+    'Timer'             => $config->application->libraryDir
+]);
+
+$loader->register();
+
+
+
+
