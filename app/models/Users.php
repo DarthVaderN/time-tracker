@@ -89,6 +89,7 @@ class Users extends \Phalcon\Mvc\Model
     {
         $this->setSchema("timer");
         $this->setSource("users");
+
         $this->belongsTo('profiles_id', Profiles::class, 'id', [
             'alias' => 'profile',
             'reusable' => true
@@ -97,12 +98,22 @@ class Users extends \Phalcon\Mvc\Model
             'alias' => 'timer',
             'reusable' => true, // additional parameters like where, order, limit etc...
             'params' => [
-                'order' => 'time ASC',
-//                'bind' => [
-//                    'type' => get_class($this)
-//                ]
+                'order' => 'time ASC'
             ]
         ]);
+        $this->hasMany('id', SuccessLogins::class, 'users_id', [
+            'alias' => 'successLogins',
+            'foreignKey' => [
+                'message' => 'User cannot be deleted because he/she has activity in the system'
+            ]
+        ]);
+        $this->hasMany('id', PasswordChanges::class, 'users_id', [
+            'alias' => 'passwordChanges',
+            'foreignKey' => [
+                'message' => 'User cannot be deleted because he/she has activity in the system'
+            ]
+        ]);
+
     }
 
     /**

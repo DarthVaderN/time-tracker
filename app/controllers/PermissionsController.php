@@ -28,6 +28,8 @@ use Profiles;
  */
 class PermissionsController extends ControllerBase
 {
+
+
     /**
      * View the permissions for a profile level, and change them if we have a POST.
      */

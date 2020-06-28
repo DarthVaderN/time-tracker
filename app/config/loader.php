@@ -12,7 +12,8 @@ $loader->registerDirs([
 
 ]);
 $loader->registerNamespaces([
-    'Timer'             => $config->application->libraryDir
+    'Timer'                     => $config->application->libraryDir,
+    'Timer\Forms'               => $config->application->formsDir
 ]);
 
 $loader->register();

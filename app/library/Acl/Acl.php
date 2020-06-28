@@ -22,6 +22,7 @@ use Phalcon\Mvc\User\Component;
 use Phalcon\Acl\Role as AclRole;
 use Phalcon\Acl\Resource as AclResource;
 use Phalcon\Acl\Adapter\Memory as AclMemory;
+use Profiles;
 
 /**
  * Vokuro\Acl\Acl
@@ -139,7 +140,7 @@ class Acl extends Component
     public function getPermissions(Profiles $profile)
     {
         $permissions = [];
-        foreach ($profile->getPermissions() as $permission) {
+        foreach ($profile->permission as $permission) {
             $permissions[$permission->resource . '.' . $permission->action] = true;
         }
         return $permissions;
@@ -200,7 +201,7 @@ class Acl extends Component
         // Grant access to private area to role Users
         foreach ($profiles as $profile) {
             // Grant permissions in "permissions" model
-            foreach ($profile->getPermissions() as $permission) {
+            foreach ($profile->permission as $permission) {
                 $acl->allow($profile->name, $permission->resource, $permission->action);
             }
 

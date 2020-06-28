@@ -30,6 +30,7 @@ class Profiles extends \Phalcon\Mvc\Model
     {
         $this->setSchema("timer");
         $this->setSource("profiles");
+
         $this->hasMany('id', Users::class, 'profiles_id', [
             'alias' => 'users',
             'foreignKey' => [
@@ -37,7 +38,7 @@ class Profiles extends \Phalcon\Mvc\Model
             ]
         ]);
         $this->hasMany('id', Permissions::class, 'profiles_id', [
-            'alias' => 'permissions',
+            'alias' => 'permission',
             'foreignKey' => [
                 'action' => Relation::ACTION_CASCADE
             ]

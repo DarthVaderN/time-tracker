@@ -3,6 +3,7 @@
     <div class="page_body">
         <table class="content">
             <div class="left_column"><h1>My Hours Log</h1><br>
+                <?= $this->tag->linkTo(['session/login', 'Login', 'class'=>'nav-link']) ?>
                 <div>
                     <div style="float:left; width:400px;">
 
@@ -83,6 +84,8 @@
                             <tbody class="full_day">
                             <?php $total = 0; ?>
                             <tr class="full_day display_none">
+                                <td></td>
+                                <td></td>
 <!--                                test -->
                                 <?php foreach ($users as $item) { ?>
                                         <td>
@@ -133,5 +136,8 @@
                         </div>
                         <?php echo $this->tag->endForm(); ?>
                     </div>
+                </div>
+                </div>
+                </div>
                 </div>
 

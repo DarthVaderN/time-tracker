@@ -9,6 +9,7 @@ use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
 use Timer\Acl\Acl;
+use Timer\Auth\Auth;
 
 /**
  * Shared configuration service
@@ -102,6 +103,10 @@ $di->set('flash', function () {
         'warning' => 'alert alert-warning'
     ]);
 });
+$di->set('auth', function () {
+    return new Auth();
+});
+
 $di->setShared('AclResources', function() {
     $pr = [];
     if (is_readable(APP_PATH . '/config/privateResources.php')) {

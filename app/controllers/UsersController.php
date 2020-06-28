@@ -12,7 +12,8 @@ class UsersController extends ControllerBase
      */
     public function indexAction()
     {
-
+        $this->persistent->conditions = null;
+//        $this->view->form = new UsersForm();
     }
 
     /**
@@ -91,7 +92,7 @@ class UsersController extends ControllerBase
             $this->tag->setDefault("email", $user->email);
             $this->tag->setDefault("password", $user->password);
             $this->tag->setDefault("mustChangePassword", $user->mustChangePassword);
-            $this->tag->setDefault("profiles_Id", $user->profiles_Id);
+            $this->tag->setDefault("profiles_id", $user->profiles_id);
             $this->tag->setDefault("banned", $user->banned);
             $this->tag->setDefault("suspended", $user->suspended);
             $this->tag->setDefault("active", $user->active);
@@ -118,7 +119,7 @@ class UsersController extends ControllerBase
         $user->email = $this->request->getPost("email", "email");
         $user->password = $this->request->getPost("password");
         $user->mustChangePassword = $this->request->getPost("mustChangePassword");
-        $user->profilesId = $this->request->getPost("profiles_Id");
+        $user->profiles_id = $this->request->getPost("profiles_id");
         $user->banned = $this->request->getPost("banned");
         $user->suspended = $this->request->getPost("suspended");
         $user->active = $this->request->getPost("active");
@@ -179,7 +180,7 @@ class UsersController extends ControllerBase
         $user->email = $this->request->getPost("email", "email");
         $user->password = $this->request->getPost("password");
         $user->mustChangePassword = $this->request->getPost("mustChangePassword");
-        $user->profilesId = $this->request->getPost("profiles_Id");
+        $user->profiles_id = $this->request->getPost("profiles_id");
         $user->banned = $this->request->getPost("banned");
         $user->suspended = $this->request->getPost("suspended");
         $user->active = $this->request->getPost("active");

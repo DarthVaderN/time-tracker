@@ -5,7 +5,7 @@
  */
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
-preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]);
+//preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]);
 
 
 return new \Phalcon\Config([
@@ -25,6 +25,7 @@ return new \Phalcon\Config([
         'viewsDir'       => APP_PATH . '/views/',
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
+        'formsDir'       => APP_PATH . '/forms/',
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/time-tracker/',
     ]

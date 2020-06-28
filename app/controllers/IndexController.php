@@ -8,8 +8,9 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
         $this->view->users = Users::find();
-        $this->view->timerStart = Timer::find();
+//        $this->view->timerStart = Timer::find();
 
 
 
