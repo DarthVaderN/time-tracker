@@ -1,33 +1,26 @@
 
-<?php echo $this->getContent(); ?>
+<?= $this->getContent() ?>
 
-<?php
-echo $this->tag->form(
-    [
-        "permissions/index",
-        "autocomplete" => "off",
-        "class" => "form-horizontal"
-    ]
-);
-?>
+<?= $this->tag->form(['role' => 'form']) ?>
 <div class="row d-flex justify-content-center">
     <div class="col-md-8  mb-4 mt-4">
         <h2 class="mb-sm-6 pb-sm-2">Manage permissions</h2>
 
-                   <div class="row mt-4 form-group justify-content-center">
-                        <label class="mr-4 col-form-label text-center" for="profileId">Profile</label>
-                        <div class="mr-4">
-                            <?php echo $this->tag->selectStatic(['profiles_id', $profiles, 'using'=> ['id', 'name'], 'useEmpty' => true, 'emptyText' => '...', 'emptyValue' => '', "class" => "form-control"]) ?>
-                        </div>
-                        <div class="">
-                            <?php echo $this->tag->submitButton(["Search", "class" => "btn btn-primary",'name' => 'search']) ?>
-                        </div>
-                    </div>
+        <div class="row mt-4 form-group justify-content-center">
+            <label class="mr-4 col-form-label text-center" for="profileId">Profile</label>
+            <div class="mr-4">
+                <?= $this->tag->select(['profileId', $profiles, 'using' => ['id', 'name'], 'useEmpty' => true, 'emptyText' => '...', 'emptyValue' => '', 'class' => 'form-control mb-2 mb-sm-0']) ?>
+            </div>
+            <div class="">
+                <?= $this->tag->submitButton(['Search', 'class' => 'btn btn-primary', 'name' => 'search']) ?>
+            </div>
+        </div>
 
-        <?php foreach ($profiles as $profile) { ?>
-            <?php foreach ($profile->permissions as $permission) { ?>
+        <?php if ($this->request->isPost() && $profile) { ?>
 
-                <h3><?php echo $permission->resource ?></h3>
+            <?php foreach ($this->acl->getResources() as $resource => $actions) { ?>
+
+                <h3><?= $resource ?></h3>
 
                 <table class="table table-bordered table-striped" align="center">
                     <thead>
@@ -37,25 +30,19 @@ echo $this->tag->form(
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr>
-                        <td align="center"><input type="checkbox" name="permissions[]"
-                                                  value="{{ resource ~ '.' ~ action }}" {% if permissions[resource ~ '.'
-                            ~ action] is defined %} checked="checked" {% endif %}>
-                        </td>
-                        <td>{{ acl.getActionDescription(action) ~ ' ' ~ resource }}</td>
-                    </tr>
-
+                    <?php foreach ($actions as $action) { ?>
+                        <tr>
+                            <td align="center"><input type="checkbox" name="permissions[]" value="<?= $resource . '.' . $action ?>"  <?php if (isset($permissions[$resource . '.' . $action])) { ?> checked="checked" <?php } ?>></td>
+                            <td><?= $this->acl->getActionDescription($action) . ' ' . $resource ?></td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
 
-
-
-
-
             <?php } ?>
 
-        <?php } ?>
-        <?php echo $this->tag->submitButton(["Submit", "class" => "btn btn-primary",'name' => 'submit']) ?>
+            <?= $this->tag->submitButton(['Submit', 'class' => 'btn btn-primary', 'name' => 'submit']) ?>
 
-<?php echo $this->tag->endForm(); ?>
+        <?php } ?>
+
+    </div>

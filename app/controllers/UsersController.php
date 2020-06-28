@@ -3,7 +3,9 @@
 
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use Users;
+use Timer\Forms\ChangePasswordForm;
+use Timer\Forms\UsersForm;
+
 
 class UsersController extends ControllerBase
 {
@@ -105,45 +107,35 @@ class UsersController extends ControllerBase
      */
     public function createAction()
     {
-        if (!$this->request->isPost()) {
-            $this->dispatcher->forward([
-                'controller' => "users",
-                'action' => 'index'
-            ]);
+        $form = new UsersForm(null);
 
-            return;
-        }
+        if ($this->request->isPost()) {
+            if ($form->isValid($this->request->getPost()) == false) {
+                foreach ($form->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+            } else {
+                $user = new Users();
+                $user->name = $this->request->getPost("name");
+                $user->email = $this->request->getPost("email", "email");
+                $user->password = $this->request->getPost("password");
+                $user->mustChangePassword = $this->request->getPost("mustChangePassword");
+                $user->profiles_id = $this->request->getPost("profiles_id");
+                $user->banned = $this->request->getPost("banned");
+                $user->suspended = $this->request->getPost("suspended");
+                $user->active = $this->request->getPost("active");
 
-        $user = new Users();
-        $user->name = $this->request->getPost("name");
-        $user->email = $this->request->getPost("email", "email");
-        $user->password = $this->request->getPost("password");
-        $user->mustChangePassword = $this->request->getPost("mustChangePassword");
-        $user->profiles_id = $this->request->getPost("profiles_id");
-        $user->banned = $this->request->getPost("banned");
-        $user->suspended = $this->request->getPost("suspended");
-        $user->active = $this->request->getPost("active");
-        
+                if (!$user->save()) {
+                    $this->flash->error($user->getMessages());
+                } else {
+                    $this->flash->success("User was created successfully");
 
-        if (!$user->save()) {
-            foreach ($user->getMessages() as $message) {
-                $this->flash->error($message);
+                    $form->clear();
+                }
             }
-
-            $this->dispatcher->forward([
-                'controller' => "users",
-                'action' => 'new'
-            ]);
-
-            return;
         }
 
-        $this->flash->success("user was created successfully");
-
-        $this->dispatcher->forward([
-            'controller' => "users",
-            'action' => 'index'
-        ]);
+        $this->view->form = $form;
     }
 
     /**
@@ -184,7 +176,7 @@ class UsersController extends ControllerBase
         $user->banned = $this->request->getPost("banned");
         $user->suspended = $this->request->getPost("suspended");
         $user->active = $this->request->getPost("active");
-        
+
 
         if (!$user->save()) {
 
@@ -227,27 +219,47 @@ class UsersController extends ControllerBase
 
             return;
         }
-
-        if (!$user->delete()) {
-
-            foreach ($user->getMessages() as $message) {
-                $this->flash->error($message);
-            }
-
-            $this->dispatcher->forward([
-                'controller' => "users",
-                'action' => 'search'
-            ]);
-
-            return;
-        }
-
+        $user->active = 'N';
+        $user->banned = 'Y';
+        $user->update();
         $this->flash->success("user was deleted successfully");
 
         $this->dispatcher->forward([
             'controller' => "users",
             'action' => "index"
         ]);
+    }
+    public function changePasswordAction()
+    {
+        $form = new ChangePasswordForm();
+
+        if ($this->request->isPost()) {
+            if (!$form->isValid($this->request->getPost())) {
+                foreach ($form->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+            } else {
+                $user = $this->auth->getUser();
+
+                $user->password = $this->security->hash($this->request->getPost('password'));
+                $user->mustChangePassword = 'N';
+
+                $passwordChange = new PasswordChanges();
+                $passwordChange->user = $user;
+                $passwordChange->ipAddress = $this->request->getClientAddress();
+                $passwordChange->userAgent = $this->request->getUserAgent();
+
+                if (!$passwordChange->save()) {
+                    $this->flash->error($passwordChange->getMessages());
+                } else {
+                    $this->flash->success('Your password was successfully changed');
+
+                    $form->clear();
+                }
+            }
+        }
+
+        $this->view->form = $form;
     }
 
 }

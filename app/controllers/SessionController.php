@@ -77,7 +77,7 @@ class SessionController extends ControllerBase
                         'remember' => $this->request->getPost('remember')
                     ]);
 
-                    return $this->response->redirect('users/index');
+                    return $this->response->redirect('index/index');
                 }
             }
         } catch (Exception $e) {

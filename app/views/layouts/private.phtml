@@ -1,0 +1,44 @@
+<nav id="topNav" class="navbar navbar-expand-sm navbar-dark bg-secondary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" area-expanded="false" aria-label="Toggle Navigation">
+        <span class="oi oi-menu" title="MENU" aria-hidden="true"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav-content">
+        <ul class="navbar-nav"><?php $menus = ['Home' => null, 'Users' => 'users', 'Profiles' => 'profiles']; ?><?php foreach ($menus as $key => $value) { ?>
+                <?php if ($value == $this->dispatcher->getControllerName()) { ?>
+                    <li class="active nav-item"><?= $this->tag->linkTo([$value, $key, 'class' => 'nav-link']) ?></li>
+                <?php } else { ?>
+                    <li><?= $this->tag->linkTo([$value, $key, 'class' => 'nav-link']) ?></li>
+                <?php } ?><?php } ?></ul>
+    </div> <!-- navbar-collapse -->
+
+    <?= $this->tag->linkTo([null, 'class' => 'navbar-brand', 'Timer-tracker']) ?>
+
+    <button class="navbar-toggler justify-content-end" type="button" data-toggle="collapse" data-target="#nav-content-secondary" aria-controls="nav-content-secondary" area-expanded="false" aria-label="Toggle Navigation Secondary">
+        <span class="oi oi-person" title="person" aria-hidden="true"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="nav-content-secondary">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="drop-menu"><?= $this->auth->getName() ?></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-lablledby="drop-menu">
+                    <?= $this->tag->linkTo(['users/changePassword', 'Change Password', 'class' => 'dropdown-item']) ?>
+                </div>
+            </li>
+            <li class="nav-item"><?= $this->tag->linkTo(['timer/index', 'Staff', 'class' => 'nav-link']) ?></li>
+            <li class="nav-item"><?= $this->tag->linkTo(['session/logout', 'Logout', 'class' => 'nav-link']) ?></li>
+        </ul>
+    </div>
+
+</nav>
+
+<main role="main" class="container mt-4">
+    <?= $this->getContent() ?>
+</main>
+
+
+
+
+

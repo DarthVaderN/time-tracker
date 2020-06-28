@@ -1,0 +1,69 @@
+<?= $this->getContent() ?>
+
+<div class="row">
+    <div class="col-6">
+        <?= $this->tag->linkTo(['users', '<span class="oi oi-chevron-left" title="chevron-left" aria-hidden="true"></span> Go Back', 'class' => 'btn btn-outline-primary']) ?>
+    </div>
+    <div class="col-6 text-right">
+
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-6  mb-4 mt-4">
+        <h2 class="mb-sm-6 pb-sm-2">Create user</h2>
+        <?= $this->tag->form(['users/create', 'role' => 'form']) ?>
+
+
+        <div class="form-group row">
+            <?= $form->label('name', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('name', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <?= $form->label('email', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('email', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+        <div class="form-group row">
+            <?= $form->label('password', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('password', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+        <div class="form-group row">
+            <?= $form->label('confirmPassword', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('confirmPassword', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+        <div class="form-group row">
+            <?= $form->label('banned', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('banned', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+        <div class="form-group row">
+            <?= $form->label('suspended', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('suspended', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <?= $form->label('profiles_id', ['class' => 'col-md-3 col-form-label']) ?>
+            <div class="col-md-9">
+                <?= $form->render('profiles_id', ['class' => 'form-control ']) ?>
+            </div>
+        </div>
+        <div class="form-group row justify-content-end">
+            <div class="col-md-9" >
+                <?= $this->tag->submitButton(['Save', 'class' => 'btn btn-success btn-block']) ?>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

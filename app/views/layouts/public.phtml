@@ -1,0 +1,51 @@
+<nav id="topNav" class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" area-expanded="false" aria-label="Toggle Navigation">
+        <span class="oi oi-menu" title="MENU" aria-hidden="true"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="nav-content">
+        <ul class="navbar-nav"><?php $menus = ['Home' => 'index', 'Staff' => 'timer']; ?><?php foreach ($menus as $key => $value) { ?>
+                <?php if ($value == $this->dispatcher->getControllerName()) { ?>
+                    <li class="active nav-item"><?= $this->tag->linkTo([$value, $key, 'class' => 'nav-link']) ?></li>
+                <?php } else { ?>
+                    <li><?= $this->tag->linkTo([$value, $key, 'class' => 'nav-link']) ?></li>
+                <?php } ?><?php } ?></ul>
+    </div> <!-- navbar-collapse -->
+
+    <?= $this->tag->linkTo([null, 'class' => 'navbar-brand', 'Time-tracker']) ?>
+
+    <button class="navbar-toggler justify-content-end" type="button" data-toggle="collapse" data-target="#nav-content-secondary" aria-controls="nav-content-secondary" area-expanded="false" aria-label="Toggle Navigation Secondary" >
+        <span class="oi oi-person" title="person" aria-hidden="true"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="nav-content-secondary">
+        <ul class="navbar-nav"><?php if (isset($logged_in) && !(empty($logged_in))) { ?><li class="nav-item"><?= $this->tag->linkTo(['users', 'Users Panel', 'class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->tag->linkTo(['session/logout', 'Logout', 'class' => 'nav-link']) ?></li>
+            <?php } else { ?>
+                <li class="nav-item"><?= $this->tag->linkTo(['session/login', 'Login', 'class' => 'nav-link']) ?></li>
+            <?php } ?>
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container mt-4">
+    <?= $this->getContent() ?>
+</main>
+
+
+
+<footer class="topFooter container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            Made with love by the Phalcon Team
+        </div>
+        <div class="col-md-4">
+            <?= $this->tag->linkTo(['privacy', 'Privacy Policy']) ?>
+            <?= $this->tag->linkTo(['terms', 'Terms']) ?>
+        </div>
+        <div class="col-md-4">
+            &copy; <?= date('Y') ?> Phalcon Team.
+        </div>
+    </div>
+</footer>
+
