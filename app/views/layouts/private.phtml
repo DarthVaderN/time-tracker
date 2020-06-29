@@ -1,10 +1,10 @@
-<nav id="topNav" class="navbar navbar-expand-sm navbar-dark bg-secondary">
+<nav id="topNav" class="navbar navbar-expand-sm navbar-dark bg-primary">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" area-expanded="false" aria-label="Toggle Navigation">
         <span class="oi oi-menu" title="MENU" aria-hidden="true"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="nav-content">
-        <ul class="navbar-nav"><?php $menus = ['Home' => null, 'Users' => 'users', 'Profiles' => 'profiles']; ?><?php foreach ($menus as $key => $value) { ?>
+        <ul class="navbar-nav"><?php $menus = ['Home' => null, 'Users' => 'users']; ?><?php foreach ($menus as $key => $value) { ?>
                 <?php if ($value == $this->dispatcher->getControllerName()) { ?>
                     <li class="active nav-item"><?= $this->tag->linkTo([$value, $key, 'class' => 'nav-link']) ?></li>
                 <?php } else { ?>

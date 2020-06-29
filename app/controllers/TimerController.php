@@ -8,12 +8,8 @@ class TimerController extends ControllerBase
     public function indexAction()
     {
         $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
-        $this->view->setTemplateBefore('private');
+        $this->view->setTemplateBefore('public');
         $this->view->users = Users::find();
-//        $this->view->timerStart = Timer::find();
-
-
-
     }
     //send to database time , id , user_id , state
     public function timerAction()

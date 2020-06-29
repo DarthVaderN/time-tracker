@@ -16,6 +16,7 @@ class UsersController extends ControllerBase
     {
         $this->persistent->conditions = null;
 //        $this->view->form = new UsersForm();
+        $this->view->setTemplateBefore('private');
     }
 
     /**

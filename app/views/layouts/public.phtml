@@ -5,7 +5,7 @@
 
 
     <div class="collapse navbar-collapse" id="nav-content">
-        <ul class="navbar-nav"><?php $menus = ['Home' => 'index', 'Staff' => 'timer']; ?><?php foreach ($menus as $key => $value) { ?>
+        <ul class="navbar-nav"><?php $menus = ['Home' => 'index']; ?><?php foreach ($menus as $key => $value) { ?>
                 <?php if ($value == $this->dispatcher->getControllerName()) { ?>
                     <li class="active nav-item"><?= $this->tag->linkTo([$value, $key, 'class' => 'nav-link']) ?></li>
                 <?php } else { ?>
@@ -19,7 +19,13 @@
         <span class="oi oi-person" title="person" aria-hidden="true"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="nav-content-secondary">
-        <ul class="navbar-nav"><?php if (isset($logged_in) && !(empty($logged_in))) { ?><li class="nav-item"><?= $this->tag->linkTo(['users', 'Users Panel', 'class' => 'nav-link']) ?></li>
+        <ul class="navbar-nav"><?php if (isset($logged_in) && !(empty($logged_in))) { ?>    <li class="nav-item dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="drop-menu"><?= $this->auth->getName() ?></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-lablledby="drop-menu">
+                    <?= $this->tag->linkTo(['users/changePassword', 'Change Password', 'class' => 'dropdown-item']) ?>
+                </div>
+            </li>
+                <li class="nav-item"><?= $this->tag->linkTo(['timer/index', 'Staff', 'class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->tag->linkTo(['session/logout', 'Logout', 'class' => 'nav-link']) ?></li>
             <?php } else { ?>
                 <li class="nav-item"><?= $this->tag->linkTo(['session/login', 'Login', 'class' => 'nav-link']) ?></li>

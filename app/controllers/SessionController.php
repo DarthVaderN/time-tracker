@@ -23,39 +23,7 @@ class SessionController extends ControllerBase
     {
     }
 
-    /**
-     * Allow a user to signup to the system
-     */
-    public function signupAction()
-    {
-        $form = new SignUpForm();
 
-        if ($this->request->isPost()) {
-            if ($form->isValid($this->request->getPost()) != false) {
-                $user = new Users([
-                    'name' => $this->request->getPost('name', 'striptags'),
-                    'email' => $this->request->getPost('email'),
-                    'password' => $this->security->hash($this->request->getPost('password')),
-                    'profilesId' => 2
-                ]);
-
-                if ($user->save()) {
-                    return $this->dispatcher->forward([
-                        'controller' => 'index',
-                        'action' => 'index'
-                    ]);
-                }
-
-                $this->flash->error($user->getMessages());
-            }
-        }
-
-        $this->view->form = $form;
-    }
-
-    /**
-     * Starts a session in the admin backend
-     */
     public function loginAction()
     {
         $form = new LoginForm();
@@ -77,7 +45,7 @@ class SessionController extends ControllerBase
                         'remember' => $this->request->getPost('remember')
                     ]);
 
-                    return $this->response->redirect('index/index');
+                    return $this->response->redirect('timer/index');
                 }
             }
         } catch (Exception $e) {
@@ -87,45 +55,6 @@ class SessionController extends ControllerBase
         $this->view->form = $form;
     }
 
-    /**
-     * Shows the forgot password form
-     */
-    public function forgotPasswordAction()
-    {
-        $form = new ForgotPasswordForm();
-
-        if ($this->request->isPost()) {
-            // Send emails only is config value is set to true
-            if ($this->getDI()->get('config')->useMail) {
-                if ($form->isValid($this->request->getPost()) == false) {
-                    foreach ($form->getMessages() as $message) {
-                        $this->flash->error($message);
-                    }
-                } else {
-                    $user = Users::findFirstByEmail($this->request->getPost('email'));
-                    if (!$user) {
-                        $this->flash->success('There is no account associated to this email');
-                    } else {
-                        $resetPassword = new ResetPasswords();
-                        $resetPassword->users_id = $user->id;
-                        if ($resetPassword->save()) {
-                            $this->flash->success('Success! Please check your messages for an email reset password');
-                        } else {
-                            foreach ($resetPassword->getMessages() as $message) {
-                                $this->flash->error($message);
-                            }
-                        }
-                    }
-                }
-            } else {
-                $this->flash->warning(
-                    'Emails are currently disabled. Change config key "useMail" to true to enable emails.'
-                );
-            }
-        }
-
-        $this->view->form = $form;
-    }
 
     /**
      * Closes the session

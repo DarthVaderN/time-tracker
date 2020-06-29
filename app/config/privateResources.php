@@ -19,9 +19,6 @@ return new Config([
             'edit',
             'create',
             'delete'
-        ],
-        'timer' => [
-            'index'
         ]
     ]
 ]);

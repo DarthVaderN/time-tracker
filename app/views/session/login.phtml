@@ -20,12 +20,6 @@
 
             <?= $form->render('csrf', ['value' => $this->security->getToken()]) ?>
 
-            <hr>
-
-            <div class="forgot">
-                <?= $this->tag->linkTo(['session/forgotPassword', 'Forgot password ?', 'class' => 'form-text text-muted']) ?>
-            </div>
-
             </form>
         </div>
     </div>
