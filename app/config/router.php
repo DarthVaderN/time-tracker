@@ -2,6 +2,10 @@
 
 $router = $di->getRouter();
 
-// Define your routes here
+$router->setDefaults([
+    'namespace' => 'Controller',
+    'controller' => 'index',
+    'action' => 'index',
+]);
 
 $router->handle();

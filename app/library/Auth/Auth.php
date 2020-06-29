@@ -71,12 +71,7 @@ class Auth extends Component
         ]);
     }
 
-    /**
-     * Creates the remember me environment settings the related cookies and generating tokens
-     *
-     * @param \Vokuro\Models\Users $user
-     * @throws Exception
-     */
+
     public function saveSuccessLogin($user)
     {
         $successLogin = new SuccessLogins();
@@ -126,11 +121,7 @@ class Auth extends Component
         }
     }
 
-    /**
-     * Creates the remember me environment settings the related cookies and generating tokens
-     *
-     * @param \Vokuro\Models\Users $user
-     */
+
     public function createRememberEnvironment(Users $user)
     {
         $userAgent = $this->request->getUserAgent();
@@ -209,12 +200,7 @@ class Auth extends Component
         return $this->response->redirect('session/login');
     }
 
-    /**
-     * Checks if the user is banned/inactive/suspended
-     *
-     * @param \Vokuro\Models\Users $user
-     * @throws Exception
-     */
+
     public function checkUserFlags(Users $user)
     {
         if ($user->active != 'Y') {
@@ -295,12 +281,7 @@ class Auth extends Component
         ]);
     }
 
-    /**
-     * Get the entity related to user in the active identity
-     *
-     * @return \Vokuro\Models\Users
-     * @throws Exception
-     */
+
     public function getUser()
     {
         $identity = $this->session->get('auth-identity');
