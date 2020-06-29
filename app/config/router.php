@@ -12,14 +12,10 @@ $groups = [
         'namespace' => 'Controller\\Profile',
         'controller' => 'profile',
     ],
-    '/products' => [
-        'namespace' => 'Controller\\Products',
-        'controller' => 'products',
-    ],
-    '/categories' => [
-        'namespace' => 'Controller\\Categories',
-        'controller' => 'categories',
-    ],
+    '/users' => [
+        'namespace' => 'Controller\\Users',
+        'controller' => 'users',
+    ]
 ];
 
 foreach ($groups as $prefix => $groupDefinition) {
