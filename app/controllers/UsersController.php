@@ -15,7 +15,7 @@ class UsersController extends ControllerBase
     public function indexAction()
     {
         $this->persistent->conditions = null;
-//        $this->view->form = new UsersForm();
+        $this->view->users = Users::find();
         $this->view->setTemplateBefore('private');
     }
 

@@ -6,7 +6,7 @@
 
 <div class="page-header">
     <h1>
-        Search users
+         users
     </h1>
     <p>
         <?php echo $this->tag->linkTo(["users/create", "Create users",'class' => 'btn btn-outline-primary']) ?>
@@ -15,84 +15,31 @@
 
 <?php echo $this->getContent() ?>
 
-<?php
-    echo $this->tag->form(
-        [
-            "users/search",
-            "autocomplete" => "off",
-            "class" => "form-horizontal"
-        ]
-    );
-?>
+<?php foreach ($users as $user){?>
+    <tr>
+        <td>USER : <?php echo $user->name ?></td>
+        <hr>
+        <br>
+            <?php foreach ($user->timer as $item){?>
+                 <td>time: <?php echo $item->time .' - '. $item->stop ?></td><br>
+                <?php
+                echo $this->tag->form(
+                    [
+                        "timer/save",
+                        "autocomplete" => "off",
+                        "class" => "form-horizontal"
+                    ]
+                );
+                ?>
 
-<div class="form-group">
-    <label for="fieldId" class="col-sm-2 control-label">Id</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["id", "type" => "number", "class" => "form-control", "id" => "fieldId"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldName" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["email", "size" => 30, "class" => "form-control", "id" => "fieldEmail"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldPassword" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["password", "class" => "form-control", "id" => "fieldPassword"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldMustchangepassword" class="col-sm-2 control-label">MustChangePassword</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["mustChangePassword", "class" => "form-control", "id" => "fieldMustchangepassword"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldProfilesId" class="col-sm-2 control-label">Profiles Of Id</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["profiles_Id", "type" => "number", "class" => "form-control", "id" => "fieldProfilesId"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldBanned" class="col-sm-2 control-label">Banned</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["banned", "class" => "form-control", "id" => "fieldBanned"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldSuspended" class="col-sm-2 control-label">Suspended</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["suspended", "class" => "form-control", "id" => "fieldSuspended"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldActive" class="col-sm-2 control-label">Active</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["active", "class" => "form-control", "id" => "fieldActive"]) ?>
-    </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(["Search", "class" => "btn btn-primary btn-success btn-block"]) ?>
-    </div>
-</div>
-
-<?php echo $this->tag->endForm(); ?>
+                <div class="form-group">
+                    <label for="fieldName" class="col-sm-2 control-label">Start time</label>
+                    <div class="col-sm-10">
+                        <?php echo $this->tag->textField(["time", "size" => 30, 'value'=> $item->time,"class" => "form-control", "id" => "fieldName"]) ?>
+                        <?php echo $this->tag->hiddenField(["id"=> $item->id]) ?>
+                    </div>
+                </div>
+                <?php echo $this->tag->endForm(); ?>
+            <?php }?>
+    </tr>
+<?php }?>

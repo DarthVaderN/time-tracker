@@ -1,17 +1,80 @@
 <?php
 
 
+use Phalcon\Mvc\Model\Criteria;
+use Phalcon\Paginator\Adapter\Model as Paginator;
+use Timer;
 
 class TimerController extends ControllerBase
 {
-
+    /**
+     * Index action
+     */
     public function indexAction()
     {
-        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
-        $this->view->setTemplateBefore('public');
         $this->view->users = Users::find();
+        $this->view->setTemplateBefore('public');
     }
-    //send to database time , id , user_id , state
+
+
+
+
+    /**
+     * Saves a timer edited
+     *
+     */
+    public function saveAction()
+    {
+
+        if (!$this->request->isPost()) {
+            $this->dispatcher->forward([
+                'controller' => "timer",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $id = $this->request->getPost("id");
+        $timer = Timer::findFirstByid($id);
+
+        if (!$timer) {
+            $this->flash->error("timer does not exist " . $id);
+
+            $this->dispatcher->forward([
+                'controller' => "timer",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $timer->time = $this->request->getPost("time");
+        
+
+        if (!$timer->save()) {
+
+            foreach ($timer->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "timer",
+                'action' => 'edit',
+                'params' => [$timer->id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("timer was updated successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "users",
+            'action' => 'index'
+        ]);
+    }
+
     public function timerAction()
     {
         if ($_POST['time'] === 'start') {
@@ -53,4 +116,3 @@ class TimerController extends ControllerBase
 
 
 }
-
