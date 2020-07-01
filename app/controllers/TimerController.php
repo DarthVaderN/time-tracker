@@ -13,11 +13,43 @@ class TimerController extends ControllerBase
     public function indexAction()
     {
         $this->view->users = Users::find();
+        $this->view->holiday = Holiday::find();
         $this->view->setTemplateBefore('public');
     }
 
+    /**
+     * Edits a timer
+     *
+     * @param string $id
+     */
+    public function editAction($id)
+    {
+        if (!$this->request->isPost()) {
 
+            $timer = Timer::findFirstByid($id);
+            if (!$timer) {
+                $this->flash->error("timer was not found");
 
+                $this->dispatcher->forward([
+                    'controller' => "timer",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+
+            $this->view->id = $timer->id;
+
+            $this->tag->setDefault("id", $timer->id);
+            $this->tag->setDefault("time", $timer->time);
+            $this->tag->setDefault("stop", $timer->stop);
+            $this->tag->setDefault("day", $timer->day);
+            $this->tag->setDefault("month", $timer->month);
+            $this->tag->setDefault("year", $timer->year);
+            $this->tag->setDefault("total_time", $timer->total_time);
+
+        }
+    }
 
     /**
      * Saves a timer edited
@@ -50,7 +82,8 @@ class TimerController extends ControllerBase
         }
 
         $timer->time = $this->request->getPost("time");
-        
+        $timer->stop = $this->request->getPost("stop");
+
 
         if (!$timer->save()) {
 
@@ -70,7 +103,7 @@ class TimerController extends ControllerBase
         $this->flash->success("timer was updated successfully");
 
         $this->dispatcher->forward([
-            'controller' => "users",
+            'controller' => "timer",
             'action' => 'index'
         ]);
     }

@@ -19,7 +19,12 @@ class Holiday extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $date_holiday;
+    public $day;
+    /**
+     *
+     * @var string
+     */
+    public $month;
 
     /**
      *

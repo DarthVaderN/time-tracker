@@ -21,6 +21,7 @@
         <hr>
         <br>
             <?php foreach ($user->timer as $item){?>
+                 <td>DATE: <?php echo $item->day .'/'. $item->month. '/'. $item->year ?></td><br>
                  <td>time: <?php echo $item->time .' - '. $item->stop ?></td><br>
                 <?php
                 echo $this->tag->form(
@@ -37,6 +38,11 @@
                     <div class="col-sm-10">
                         <?php echo $this->tag->textField(["time", "size" => 30, 'value'=> $item->time,"class" => "form-control", "id" => "fieldName"]) ?>
                         <?php echo $this->tag->hiddenField(["id"=> $item->id]) ?>
+                    </div>
+                    <label for="fieldName" class="col-sm-2 control-label">End time</label>
+                    <div class="col-sm-10">
+                        <?php echo $this->tag->textField(["stop", "size" => 30, 'value'=> $item->stop,"class" => "form-control", "id" => "fieldName"]) ?>
+
                     </div>
                 </div>
                 <?php echo $this->tag->endForm(); ?>

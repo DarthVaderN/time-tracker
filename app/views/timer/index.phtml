@@ -74,39 +74,51 @@
                             </thead>
                             <tbody class="full_day">
                             <?php $total = 0; ?>
-                            <?php for ($d = 1; $d <= 31; $d++) { ?>
-                            <tr class="full_day display_none">
-                                <td><?php echo $d ?></td>
-                                <?php foreach ($users as $item) { ?>
+                            <?php $months = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+                            for ($m = 1; $m <= 12; $m++) {
+                                ?>
+                                <?php for ($d = 1; $d <= 31; $d++) { ?>
+                                    <tr class="full_day display_none">
+                                        <?php foreach ($holiday as $value) { ?>
+                                            <?php if ($value->day !=  $d) { ?>
+                                        <td><?php echo $months[$m-1] ?></td>
 
-                                        <?php foreach ($item->timer as $time) {?>
-                                        <?php if($time->day == $d){?>
-                                    <td>
-                                        <div style="display: inline;" data-type="test">
-
-                                                <center><?php echo $time->time ?>
-                                                    - <?php echo $time->stop ?></center>
-
-                                                <?php
-                                                $temp = explode(':', $time->total_time);
-                                                $total += intval($temp[2]); // Add the seconds
-                                                $total += intval($temp[1]) * 60; // Add the minutes
-                                                $total += intval($temp[0]) * 60 * 60; // Add the hours
-                                                ?>
-
-                                            <?php if ($total > 0) { ?>
-                                                <center><span class="my_total_time"
-                                                              style="color: green;"><?php echo gmdate("H:i:s", $total); ?></span>
-                                                </center>
-                                            <?php } ?>
-                                        </div>
-                                    </td>
+                                        <td><?php echo $d ?></td>
                                         <?php } ?>
-                                    <?php } ?>
+                                        <?php foreach ($users as $item) { ?>
+
+                                            <?php foreach ($item->timer as $time) { ?>
+
+
+                                                <?php if ($time->day == $d && $time->month == $m && $value->day !=  $d) { ?>
+                                                    <td>
+                                                        <div style="display: inline;" data-type="test">
+
+                                                            <center><?php echo $time->time ?>
+                                                                - <?php echo $time->stop ?></center>
+
+                                                            <?php
+                                                            $temp = explode(':', $time->total_time);
+                                                            $total += intval($temp[2]); // Add the seconds
+                                                            $total += intval($temp[1]) * 60; // Add the minutes
+                                                            $total += intval($temp[0]) * 60 * 60; // Add the hours
+                                                            ?>
+
+                                                            <?php if ($total > 0) { ?>
+                                                                <center><span class="my_total_time"
+                                                                              style="color: green;"><?php echo gmdate("H:i:s", $total); ?></span>
+                                                                </center>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </td>
+                                                <?php } ?>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+
+
+                                    </tr>
                                 <?php } ?>
-
-
-                            </tr>
                             <?php } ?>
                             </tbody>
 

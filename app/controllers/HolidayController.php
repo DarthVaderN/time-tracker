@@ -13,6 +13,7 @@ class HolidayController extends ControllerBase
     public function indexAction()
     {
         $this->persistent->parameters = null;
+        $this->view->setTemplateBefore('public');
     }
 
     /**
@@ -20,6 +21,7 @@ class HolidayController extends ControllerBase
      */
     public function searchAction()
     {
+
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = Criteria::fromInput($this->di, 'Holiday', $_POST);
@@ -60,7 +62,7 @@ class HolidayController extends ControllerBase
      */
     public function newAction()
     {
-
+        $this->view->setTemplateBefore('public');
     }
 
     /**
@@ -88,7 +90,8 @@ class HolidayController extends ControllerBase
 
             $this->tag->setDefault("id", $holiday->id);
             $this->tag->setDefault("name", $holiday->name);
-            $this->tag->setDefault("date_holiday", $holiday->date_holiday);
+            $this->tag->setDefault("day", $holiday->day);
+            $this->tag->setDefault("month", $holiday->month);
             $this->tag->setDefault("active", $holiday->active);
             
         }
@@ -110,7 +113,8 @@ class HolidayController extends ControllerBase
 
         $holiday = new Holiday();
         $holiday->name = $this->request->getPost("name");
-        $holiday->dateHoliday = $this->request->getPost("date_holiday");
+        $holiday->day = $this->request->getPost("day");
+        $holiday->month = $this->request->getPost("month");
         $holiday->active = $this->request->getPost("active");
         
 
@@ -166,7 +170,8 @@ class HolidayController extends ControllerBase
         }
 
         $holiday->name = $this->request->getPost("name");
-        $holiday->dateHoliday = $this->request->getPost("date_holiday");
+        $holiday->dateHoliday = $this->request->getPost("day");
+        $holiday->dateHoliday = $this->request->getPost("month");
         $holiday->active = $this->request->getPost("active");
         
 
