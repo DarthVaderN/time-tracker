@@ -15,7 +15,18 @@ class TimerController extends ControllerBase
         $this->view->users = Users::find();
         $this->view->holiday = Holiday::find();
         $this->view->setTemplateBefore('public');
+        $start    = new DateTime('2020-01-01');
+        $end      = new DateTime('2021-12-31');
+        $interval = DateInterval::createFromDateString('1 day');
+        $this->view->period   = new DatePeriod($start, $interval, $end);
+
+
+
     }
+
+
+
+
 
     /**
      * Edits a timer

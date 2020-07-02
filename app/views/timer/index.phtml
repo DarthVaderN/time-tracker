@@ -74,31 +74,21 @@
                             </thead>
                             <tbody class="full_day">
                             <?php $total = 0; ?>
-                            <?php $months = array('Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь', 'Январь');
-                            for ($m = 1; $m <= 12; $m++) {
-                                ?>
-                                <?php for ($d = 1; $d <= 31; $d++) { ?>
+                            <?php foreach ($period as $dt){ ?>
                                     <tr class="full_day display_none">
                                         <?php foreach ($holiday as $value) { ?>
-
-                                            <?php if ($value->day != $d) { ?>
-
-                                                <td><?php echo $months[$m - 1] ?></td>
-                                                <td><?php echo $d ?></td>
-
+                                            <?php if ($value->day != $dt->format("d")) { ?>
+                                                <td><?php echo $dt->format("l m-d"); ?></td>
                                             <?php } ?>
                                             <?php foreach ($users as $item) { ?>
-
                                                 <?php foreach ($item->timer as $time) { ?>
-
-
-                                                    <?php if ($time->day == $d && $time->month == $m && $value->day != $d) { ?>
-                                                        <td>
+                                                    <?php if ($time->day == $dt->format("d") && $time->month == $dt->format("m") && $time->year == $dt->format("Y") && $value->day != $dt->format("d")) { ?>
+                                                        <td style="padding: 8px 77px; position: relative;left: 150px;">
                                                             <div style="display: inline;" data-type="test">
 
                                                                 <center><?php echo $time->time ?>
-                                                                    - <?php echo $time->stop ?></center>
-
+                                                                    - <?php echo $time->stop ?>
+                                                                </center>
                                                                 <?php
                                                                 $temp = explode(':', $time->total_time);
                                                                 $total += intval($temp[2]); // Add the seconds
@@ -122,7 +112,7 @@
 
                                     </tr>
                                 <?php } ?>
-                            <?php } ?>
+
                             </tbody>
 
                         </table>
