@@ -110,11 +110,16 @@ class TimerController extends ControllerBase
 
     public function timerAction()
     {
+        $lateTime = Late::findFirst();
         if ($_POST['time'] === 'start') {
             $timer = new Timer();
             $timer->user_id = $this->request->getPost("user_id");
-            $timer->state = '1';
             $timer->time = $timer->getTime();
+            if($timer->time > $lateTime ){
+                $timer->state = 'Not late';
+            }else {
+                $timer->state = 'Late';
+            }
             $timer->day = (int)date('d');
             $timer->month = (int)date('m');
             $timer->year = (int)date('Y');

@@ -9,11 +9,9 @@ $router->setDefaults([
 
 $groups = [
     '/profile' => [
-        'namespace' => 'Controller\\Profile',
         'controller' => 'profile',
     ],
     '/users' => [
-        'namespace' => 'Controller\\Users',
         'controller' => 'users',
     ]
 ];
