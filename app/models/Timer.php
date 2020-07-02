@@ -101,17 +101,19 @@ class Timer extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters = null);
     }
-    // test get time for view where state 1(end time) or 0(start time) ;
-//    public static function getTimer($parameters)
-//    {
-//        $di = Phalcon\DI\FactoryDefault::getDefault()->get('modelsManager')
-//            ->createBuilder();
-//
-//        $result = $di
-//            ->from('timer')->where('timer.state = '.$parameters)
-//            ->getQuery()
-//            ->execute();
-//
-//        return $result;
-//    }
+
+
+    //not working day calculate count (ignore  is parameters with day in weeks ignored for ex. [0 is sunday,  6 is saturday.])
+    function countAction($year, $month, $ignore)
+    {
+        $count = 0;
+        $counter = mktime(0, 0, 0, $month, 1, $year);
+        while (date("n", $counter) == $month) {
+            if (in_array(date("w", $counter), $ignore) == false) {
+                $count++;
+            }
+            $counter = strtotime("+1 day", $counter);
+        }
+        return $count;
+    }
 }

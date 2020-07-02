@@ -44,6 +44,11 @@
                         <?php echo $this->tag->textField(["stop", "size" => 30, 'value'=> $item->stop,"class" => "form-control", "id" => "fieldName"]) ?>
 
                     </div>
+                    <label for="fieldName" class="col-sm-2 control-label">Late</label>
+                    <div class="col-sm-10">
+                        <?php echo $this->tag->textField(["state", "size" => 30, 'value'=> $item->state,"class" => "form-control", "id" => "fieldName"]) ?>
+
+                    </div>
                 </div>
                 <?php echo $this->tag->endForm(); ?>
             <?php }?>

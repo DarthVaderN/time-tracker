@@ -2,7 +2,6 @@
 use Phalcon\Mvc\Router;
 $router = $di->getRouter();
 $router->setDefaults([
-    'namespace' => 'Controller',
     'controller' => 'index',
     'action' => 'index',
 ]);
