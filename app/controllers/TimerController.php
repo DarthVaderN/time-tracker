@@ -26,6 +26,44 @@ class TimerController extends ControllerBase
 
 
     }
+    public function searchAction()
+    {
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
+        $this->view->setTemplateBefore('public');
+        $numberPage = 1;
+        if ($this->request->isPost()) {
+            $query = Criteria::fromInput($this->di, 'Timer', $_POST);
+            $this->persistent->parameters = $query->getParams();
+        } else {
+            $numberPage = $this->request->getQuery("page", "int");
+        }
+
+        $parameters = $this->persistent->parameters;
+        if (!is_array($parameters)) {
+            $parameters = [];
+        }
+        $parameters["order"] = "id";
+
+        $timer = Timer::find($parameters);
+        if (count($timer) == 0) {
+            $this->flash->notice("The search did not find any Timer");
+
+            $this->dispatcher->forward([
+                "controller" => "Timer",
+                "action" => "index"
+            ]);
+
+            return;
+        }
+
+        $paginator = new Paginator([
+            'data' => $timer,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
+    }
 
 
 

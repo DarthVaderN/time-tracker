@@ -48,27 +48,29 @@
                     </div>
                     <div style="float: left; width: 1000px; margin-left: 20px;">
                         <center>
-                            <form action="" method="GET">
-                                <select name="month" onchange="this.form.submit();" class="form-control">
-                                    <option value="1">January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">March</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7" selected="selected">July</option>
-                                    <option value="8">August</option>
-                                    <option value="9">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <select name="year" onchange="this.form.submit();" class="form-control">
+                            <?php
+                            echo $this->tag->form(
+                                [
+                                    "timer/search",
+                                    "autocomplete" => "off",
+                                    "class" => "form-horizontal"
+                                ]
+                            );
+                            ?>
 
-                                    <option value="2019">2019</option>
-                                    <option value="2020" selected="selected">2020</option>
-                                </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                            </form>
+                            <div class="form-group" >
+                                <label for="fieldActive" class="col-sm-2 control-label">Month</label>
+                                <div class="col-sm-10">
+                                    <?php echo $this->tag->selectStatic(["month", [1 =>'January',2 =>'February',3 =>'March',4 =>'April',5 =>'May',6 =>'June',7 =>'July',8 =>'August',9 =>'September',10 =>'October',11 =>'November',12 =>'December'], "class" => "form-control","onchange" =>"this.form.submit()", "id" => "fieldActive"]) ?>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="fieldActive" class="col-sm-2 control-label">Years</label>
+                                <div class="col-sm-10">
+                                    <?php echo $this->tag->selectStatic(["year", [1 =>'2021',2 =>'2020'], "class" => "form-control","onchange" =>"this.form.submit()", "id" => "fieldActive"]) ?>
+                                </div>
+                            </div>
+                            <?php echo $this->tag->endForm(); ?>
                         </center>
                         <br>
 
@@ -147,4 +149,5 @@
             </div>
     </div>
 </div>
+
 
