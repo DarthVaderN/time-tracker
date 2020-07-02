@@ -21,14 +21,18 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="nav-content-secondary">
         <ul class="navbar-nav">
+            <?php if (isset($logged_in) && !(empty($logged_in))) { ?>
             <li class="nav-item dropdown">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="drop-menu"><?= $this->auth->getName() ?></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-lablledby="drop-menu">
                     <?= $this->tag->linkTo(['users/changePassword', 'Change Password', 'class' => 'dropdown-item']) ?>
                 </div>
             </li>
-            <li class="nav-item"><?= $this->tag->linkTo(['timer/index', 'Staff', 'class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->tag->linkTo(['timer/index', 'Staff', 'class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->tag->linkTo(['session/logout', 'Logout', 'class' => 'nav-link']) ?></li>
+            <?php } else { ?>
             <li class="nav-item"><?= $this->tag->linkTo(['session/logout', 'Logout', 'class' => 'nav-link']) ?></li>
+            <?php } ?>
         </ul>
     </div>
 

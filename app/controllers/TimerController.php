@@ -13,7 +13,10 @@ class TimerController extends ControllerBase
     public function indexAction()
     {
         $this->view->users = Users::find();
+        $this->view->timer = Timer::find();
         $this->view->holiday = Holiday::find();
+        $this->view->total_time_in_month = Late::findFirst();
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
         $this->view->setTemplateBefore('public');
         $start    = new DateTime('2020-01-01');
         $end      = new DateTime('2021-12-31');

@@ -19,7 +19,9 @@
         <span class="oi oi-person" title="person" aria-hidden="true"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="nav-content-secondary">
-        <ul class="navbar-nav"><?php if (isset($logged_in) && !(empty($logged_in))) { ?>    <li class="nav-item dropdown">
+        <ul class="navbar-nav">
+            <?php if (isset($logged_in) && !(empty($logged_in))) { ?>
+                <li class="nav-item dropdown">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="drop-menu"><?= $this->auth->getName() ?></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-lablledby="drop-menu">
                     <?= $this->tag->linkTo(['users/changePassword', 'Change Password', 'class' => 'dropdown-item']) ?>

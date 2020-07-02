@@ -237,6 +237,7 @@ class Auth extends Component
         return $identity['name'];
     }
 
+
     /**
      * Removes the user identity information from session
      */

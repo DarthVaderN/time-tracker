@@ -3,18 +3,25 @@
     <div class="page_body">
         <table class="content">
             <div class="left_column"><h1>My Hours Log</h1><br>
-                <?= $this->tag->linkTo(['session/login', 'Login', 'class'=>'nav-link']) ?>
+
                 <div>
                     <div style="float:left; width:400px;">
-
-                        You have: <b>85.98</b><br/>
-                        You have/Assigned:
-                        <b>48.85%</b><br/>
-                        Assigned: <b>176</b><br/>
+                        <?php $total = 0; ?>
+                        <?php foreach ($users as $item) { ?>
+                        <?php foreach ($item->timer as $time){
+                        $temp = explode(':', $time->total_time);
+                        $total += intval($temp[2]); // Add the seconds
+                        $total += intval($temp[1]) * 60; // Add the minutes
+                        $total += intval($temp[0]) * 60 * 60; // Add the hours
+                        }
+                        }
+                        ?>
+                        You have: <b><?php echo $total_time_in_month->total - gmdate("H:i:s", $total);  ?></b><br/>
+                        Assigned: <b><?php echo $total_time_in_month->total ?></b><br/>
                         <strong>Ты опоздал:<strong> <b>0 раз</b><br/>
 
                                 <strong>
-                                    На работе необходимо быть до 9:00. Если опоздали больше 3х раз в месяц, то дисциплина
+                                    На работе необходимо быть до <?php echo $total_time_in_month->time ?>. Если опоздали больше 3х раз в месяц, то дисциплина
                                     будет считаться не удовлетворительной и негативно скажется на запрос по повышению
                                     оклада.
                                 </strong>
@@ -73,35 +80,35 @@
                             <?php } ?>
                             </thead>
                             <tbody class="full_day">
-                            <?php $total = 0; ?>
+
                             <?php foreach ($period as $dt){ ?>
                                     <tr class="full_day display_none">
                                         <?php foreach ($holiday as $value) { ?>
                                             <?php if ($value->day != $dt->format("d")) { ?>
-                                                <td><?php echo $dt->format("l m-d"); ?></td>
+                                                <?php if ($dt->format("l") == 'Sunday' || $dt->format("l") == 'Saturday') { ?>
+                                                    <td style="color: green"><?php echo $dt->format(" F d"); ?></td>
+                                                    <td style="color: green"><?php echo $dt->format("l"); ?></td>
+                                                <?php } else { ?>
+                                                    <td><?php echo $dt->format("F d"); ?></td>
+                                                    <td><?php echo $dt->format("l"); ?></td>
+                                                <?php } ?>
                                             <?php } ?>
                                             <?php foreach ($users as $item) { ?>
                                                 <?php foreach ($item->timer as $time) { ?>
                                                     <?php if ($time->day == $dt->format("d") && $time->month == $dt->format("m") && $time->year == $dt->format("Y") && $value->day != $dt->format("d")) { ?>
-                                                        <td style="padding: 8px 77px; position: relative;left: 150px;">
+                                                        <td style="padding: 8px 77px; position: relative;left: 150px;" >
                                                             <div style="display: inline;" data-type="test">
 
                                                                 <center><?php echo $time->time ?>
                                                                     - <?php echo $time->stop ?>
                                                                 </center>
-                                                                <?php
-                                                                $temp = explode(':', $time->total_time);
-                                                                $total += intval($temp[2]); // Add the seconds
-                                                                $total += intval($temp[1]) * 60; // Add the minutes
-                                                                $total += intval($temp[0]) * 60 * 60; // Add the hours
-                                                                ?>
 
-                                                                <?php if ($total > 0) { ?>
+
                                                                     <center>
                                                                         <span class="my_total_time"
-                                                                              style="color: green;"><?php echo gmdate("H:i:s", $total); ?></span>
+                                                                              style="color: green;"><?php echo  $time->total_time ?></span>
                                                                     </center>
-                                                                <?php } ?>
+
                                                             </div>
                                                         </td>
                                                     <?php } ?>
