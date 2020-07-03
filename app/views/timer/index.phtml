@@ -98,7 +98,11 @@
                                             <?php foreach ($users as $item) { ?>
                                                 <?php foreach ($item->timer as $time) { ?>
                                                     <?php if ($time->day == $dt->format("d") && $time->month == $dt->format("m") && $time->year == $dt->format("Y") && $value->day != $dt->format("d")) { ?>
-                                                        <td style="padding: 8px 77px; position: relative;left: 150px;" >
+                                                        <?php if ($time->state == 'Late') { ?>
+                                                            <td style="padding: 8px 77px; position: relative;left: 150px; color: red">
+                                                        <?php } else { ?>
+                                                            <td style="padding: 8px 77px; position: relative;left: 150px;">
+                                                        <?php } ?>
                                                             <div style="display: inline;" data-type="test">
 
                                                                 <center><?php echo $time->time ?>
