@@ -13,7 +13,6 @@ class TimerController extends ControllerBase
     public function indexAction()
     {
         $this->view->users = Users::find();
-        $this->view->timer = Timer::find();
         $this->view->holiday = Holiday::find();
         $this->view->total_time_in_month = Late::findFirst();
         $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
@@ -58,7 +57,7 @@ class TimerController extends ControllerBase
 
         $paginator = new Paginator([
             'data' => $timer,
-            'limit'=> 10,
+            'limit'=> 5,
             'page' => $numberPage
         ]);
 
