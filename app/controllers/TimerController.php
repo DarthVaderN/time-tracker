@@ -154,7 +154,7 @@ class TimerController extends ControllerBase
         $this->flash->success("timer was updated successfully");
 
         $this->dispatcher->forward([
-            'controller' => "timer",
+            'controller' => "users",
             'action' => 'index'
         ]);
     }
@@ -167,9 +167,9 @@ class TimerController extends ControllerBase
             $timer->user_id = $this->request->getPost("user_id");
             $timer->time = $timer->getTime();
             if($timer->time > $lateTime ){
-                $timer->state = 'Not late';
+                $timer->state = 0;
             }else {
-                $timer->state = 'Late';
+                $timer->state = 1;
             }
             $timer->day = (int)date('d');
             $timer->month = (int)date('m');

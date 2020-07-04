@@ -10,6 +10,7 @@
     </h1>
     <p>
         <?php echo $this->tag->linkTo(["users/create", "Create users",'class' => 'btn btn-outline-primary']) ?>
+
     </p>
 </div>
 
@@ -18,39 +19,8 @@
 <?php foreach ($users as $user){?>
     <tr>
         <td>USER : <?php echo $user->name ?></td>
+        <?php echo $this->tag->linkTo(["users/edit/".$user->id, "Edit users",'class' => 'btn btn-outline-primary']) ?>
         <hr>
         <br>
-            <?php foreach ($user->timer as $item){?>
-                 <td>DATE: <?php echo $item->day .'/'. $item->month. '/'. $item->year ?></td><br>
-                 <td>time: <?php echo $item->time .' - '. $item->stop ?></td><br>
-                <?php
-                echo $this->tag->form(
-                    [
-                        "timer/save",
-                        "autocomplete" => "off",
-                        "class" => "form-horizontal"
-                    ]
-                );
-                ?>
-
-                <div class="form-group">
-                    <label for="fieldName" class="col-sm-2 control-label">Start time</label>
-                    <div class="col-sm-10">
-                        <?php echo $this->tag->textField(["time", "size" => 30, 'value'=> $item->time,"class" => "form-control", "id" => "fieldName"]) ?>
-                        <?php echo $this->tag->hiddenField(["id"=> $item->id]) ?>
-                    </div>
-                    <label for="fieldName" class="col-sm-2 control-label">End time</label>
-                    <div class="col-sm-10">
-                        <?php echo $this->tag->textField(["stop", "size" => 30, 'value'=> $item->stop,"class" => "form-control", "id" => "fieldName"]) ?>
-
-                    </div>
-                    <label for="fieldName" class="col-sm-2 control-label">Late</label>
-                    <div class="col-sm-10">
-                        <?php echo $this->tag->textField(["state", "size" => 30, 'value'=> $item->state,"class" => "form-control", "id" => "fieldName"]) ?>
-
-                    </div>
-                </div>
-                <?php echo $this->tag->endForm(); ?>
-            <?php }?>
     </tr>
 <?php }?>

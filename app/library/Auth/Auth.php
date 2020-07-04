@@ -236,6 +236,11 @@ class Auth extends Component
         $identity = $this->session->get('auth-identity');
         return $identity['name'];
     }
+    public function getId()
+    {
+        $identity = $this->session->get('auth-identity');
+        return $identity['id'];
+    }
 
 
     /**

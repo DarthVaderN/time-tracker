@@ -3,6 +3,7 @@
 
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
+use Timer\Forms\UsersForm;
 
 class ProfilesController extends ControllerBase
 {
@@ -62,34 +63,51 @@ class ProfilesController extends ControllerBase
 
     }
 
-    /**
-     * Edits a profile
-     *
-     * @param string $id
-     */
     public function editAction($id)
     {
-        if (!$this->request->isPost()) {
+        $user = Users::findFirstById($id);
 
-            $profile = Profiles::findFirstByid($id);
-            if (!$profile) {
-                $this->flash->error("profile was not found");
-
-                $this->dispatcher->forward([
-                    'controller' => "profiles",
-                    'action' => 'index'
-                ]);
-
-                return;
-            }
-
-            $this->view->id = $profile->id;
-
-            $this->tag->setDefault("id", $profile->id);
-            $this->tag->setDefault("name", $profile->name);
-            $this->tag->setDefault("active", $profile->active);
-            
+        if (!$user) {
+            $this->flash->error("User was not found");
+            return $this->dispatcher->forward([
+                'action' => 'index'
+            ]);
         }
+
+        if ($this->request->isPost()) {
+            $user->assign([
+                'name' => $this->request->getPost('name', 'striptags'),
+                'profilesId' => $this->request->getPost('profilesId', 'int'),
+                'email' => $this->request->getPost('email', 'email'),
+                'banned' => $this->request->getPost('banned'),
+                'suspended' => $this->request->getPost('suspended'),
+                'active' => $this->request->getPost('active')
+            ]);
+
+            $form = new UsersForm($user, [
+                'edit' => true
+            ]);
+
+            if ($form->isValid($this->request->getPost()) == false) {
+                foreach ($form->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+            } else {
+                if (!$user->save()) {
+                    $this->flash->error($user->getMessages());
+                } else {
+                    $this->flash->success("User was updated successfully");
+
+                    $form->clear();
+                }
+            }
+        }
+
+        $this->view->user = $user;
+
+        $this->view->form = new UsersForm($user, [
+            'edit' => true
+        ]);
     }
 
     /**

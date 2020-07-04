@@ -16,7 +16,8 @@ class UsersController extends ControllerBase
     {
         $this->persistent->conditions = null;
         $this->view->users = Users::find();
-        $this->view->setTemplateBefore('private');
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
+        $this->view->setTemplateBefore('public');
     }
 
     /**
@@ -74,9 +75,12 @@ class UsersController extends ControllerBase
      */
     public function editAction($id)
     {
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
+        $this->view->setTemplateBefore('public');
         if (!$this->request->isPost()) {
 
             $user = Users::findFirstByid($id);
+            $timer = $user->timer;
             if (!$user) {
                 $this->flash->error("user was not found");
 
@@ -89,6 +93,7 @@ class UsersController extends ControllerBase
             }
 
             $this->view->id = $user->id;
+            $this->view->timer = $timer;
 
             $this->tag->setDefault("id", $user->id);
             $this->tag->setDefault("name", $user->name);
@@ -99,6 +104,8 @@ class UsersController extends ControllerBase
             $this->tag->setDefault("banned", $user->banned);
             $this->tag->setDefault("suspended", $user->suspended);
             $this->tag->setDefault("active", $user->active);
+
+
             
         }
     }

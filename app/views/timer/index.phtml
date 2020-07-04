@@ -21,7 +21,6 @@
                         You have: <b><?php echo $total_time_in_month->total - gmdate("H:i:s", $total);  ?></b><br/>
                         Assigned: <b><?php echo $total_time_in_month->total ?></b><br/>
 
-
                                 <strong>
                                     На работе необходимо быть до <?php echo $total_time_in_month->time ?>. Если опоздали больше 3х раз в месяц, то дисциплина
                                     будет считаться не удовлетворительной и негативно скажется на запрос по повышению
@@ -76,7 +75,7 @@
                         </center>
                         <br>
 
-                        <table class="table table-bordered" style="float: left;">
+                        <table class="table" style="float: left;">
                             <thead>
                             <th>hidden/SHow</th>
                             <?php foreach ($users as $user) { ?>
@@ -85,48 +84,50 @@
                             </thead>
                             <tbody class="full_day">
 
-                            <?php foreach ($period as $dt){ ?>
-                                    <tr class="full_day display_none">
-                                        <?php foreach ($holiday as $value) { ?>
-                                            <?php if ($value->day != $dt->format("d")) { ?>
-                                                <?php if ($dt->format("l") == 'Sunday' || $dt->format("l") == 'Saturday') { ?>
-                                                    <td style="color: green"><?php echo $dt->format(" F d"); ?></td>
-                                                    <td style="color: green"><?php echo $dt->format("l"); ?></td>
-                                                <?php } else { ?>
-                                                    <td><?php echo $dt->format("F d"); ?></td>
-                                                    <td><?php echo $dt->format("l"); ?></td>
-                                                <?php } ?>
+                            <?php foreach ($period as $dt) { ?>
+                                <tr class="full_day display_none">
+                                    <?php foreach ($holiday as $value) { ?>
+                                        <?php if ($value->day != $dt->format("d")) { ?>
+                                            <?php if ($dt->format("l") == 'Sunday' || $dt->format("l") == 'Saturday') { ?>
+                                                <td class="table-bordered"
+                                                    style="color: green"><?php echo $dt->format(" F d"); ?></td>
+                                                <td class="table-bordered"
+                                                    style="color: green"><?php echo $dt->format("l"); ?></td>
+                                            <?php } else { ?>
+                                                <td><?php echo $dt->format("F d"); ?></td>
+                                                <td><?php echo $dt->format("l"); ?></td>
                                             <?php } ?>
-                                            <?php foreach ($users as $item) { ?>
-                                                <?php foreach ($item->timer as $time) { ?>
-                                                    <?php if ($time->day == $dt->format("d") && $time->month == $dt->format("m") && $time->year == $dt->format("Y") && $value->day != $dt->format("d")) { ?>
-                                                        <?php if ($time->state == 'Late') { ?>
-                                                            <td style="padding: 8px 77px; position: relative;left: 150px; color: red">
-                                                        <?php } else { ?>
-                                                            <td style="padding: 8px 77px; position: relative;left: 150px;">
-                                                        <?php } ?>
-                                                            <div style="display: inline;" data-type="test">
-
-                                                                <center><?php echo $time->time ?>
-                                                                    - <?php echo $time->stop ?>
-                                                                </center>
-
-
-                                                                    <center>
-                                                                        <span class="my_total_time"
-                                                                              style="color: green;"><?php echo  $time->total_time ?></span>
-                                                                    </center>
-
-                                                            </div>
-                                                        </td>
+                                        <?php } ?>
+                                        <?php foreach ($users as $item) { ?>
+                                            <?php foreach ($item->timer as $time) { ?>
+                                                <?php if ($time->day == $dt->format("d") && $time->month == $dt->format("m") && $time->year == $dt->format("Y") && $value->day != $dt->format("d")) { ?>
+                                                    <?php if ($time->state == 1) { ?>
+                                                        <td style="padding: 8px 77px; position: relative;left: 150px; color: red">
+                                                    <?php } else { ?>
+                                                        <td style="padding: 8px 77px; position: relative;left: 150px;">
                                                     <?php } ?>
+                                                    <div style="display: inline;" data-type="test">
+
+                                                        <center><?php echo $time->time ?>
+                                                            - <?php echo $time->stop ?>
+                                                        </center>
+
+
+                                                        <center>
+                                                                        <span class="my_total_time"
+                                                                              style="color: green;"><?php echo $time->total_time ?></span>
+                                                        </center>
+
+                                                    </div>
+                                                    </td>
                                                 <?php } ?>
                                             <?php } ?>
                                         <?php } ?>
+                                    <?php } ?>
 
 
-                                    </tr>
-                                <?php } ?>
+                                </tr>
+                            <?php } ?>
 
                             </tbody>
 
