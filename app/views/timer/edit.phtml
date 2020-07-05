@@ -23,7 +23,7 @@
 <?php
     echo $this->tag->form(
         [
-            "users/save",
+            "timer/save",
             "autocomplete" => "off",
             "class" => "form-horizontal"
         ]
@@ -31,60 +31,47 @@
 ?>
 
 <div class="form-group">
-    <label for="fieldName" class="col-sm-2 control-label">Name</label>
+    <label for="fieldName" class="col-sm-2 control-label">Start Time</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+        <?php echo $this->tag->textField(["time", "size" => 30, "class" => "form-control", "id" => "fieldTime"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
+    <label for="fieldEmail" class="col-sm-2 control-label">Stop Time</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["email", "size" => 30, "class" => "form-control", "id" => "fieldEmail"]) ?>
+        <?php echo $this->tag->textField(["stop", "size" => 30, "class" => "form-control", "id" => "fieldStop"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldPassword" class="col-sm-2 control-label">Password</label>
+    <label for="fieldPassword" class="col-sm-2 control-label">Day</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["password", "class" => "form-control", "id" => "fieldPassword"]) ?>
+        <?php echo $this->tag->textField(["day", "class" => "form-control", "id" => "fieldDay"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldMustchangepassword" class="col-sm-2 control-label">MustChangePassword</label>
+    <label for="fieldMustchangepassword" class="col-sm-2 control-label">Month</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["mustChangePassword", "class" => "form-control", "id" => "fieldMustchangepassword"]) ?>
+        <?php echo $this->tag->textField(["month", "class" => "form-control", "id" => "fieldMonth"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldProfilesId" class="col-sm-2 control-label">Profiles Of Id</label>
+    <label for="fieldProfilesId" class="col-sm-2 control-label">Year</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["profiles_Id", "type" => "number", "class" => "form-control", "id" => "fieldProfilesId"]) ?>
+        <?php echo $this->tag->textField(["year", "type" => "number", "class" => "form-control", "id" => "fieldYear"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldBanned" class="col-sm-2 control-label">Banned</label>
+    <label for="fieldBanned" class="col-sm-2 control-label">Total time</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["banned", "class" => "form-control", "id" => "fieldBanned"]) ?>
+        <?php echo $this->tag->textField(["total_time", "class" => "form-control", "id" => "fieldTotalTime"]) ?>
     </div>
 </div>
 
-<div class="form-group">
-    <label for="fieldSuspended" class="col-sm-2 control-label">Suspended</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["suspended", "class" => "form-control", "id" => "fieldSuspended"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldActive" class="col-sm-2 control-label">Active</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["active", "class" => "form-control", "id" => "fieldActive"]) ?>
-    </div>
-</div>
 
 
 <?php echo $this->tag->hiddenField("id") ?>

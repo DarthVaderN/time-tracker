@@ -75,6 +75,8 @@ class TimerController extends ControllerBase
      */
     public function editAction($id)
     {
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
+        $this->view->setTemplateBefore('public');
         if (!$this->request->isPost()) {
 
             $timer = Timer::findFirstByid($id);
@@ -134,6 +136,10 @@ class TimerController extends ControllerBase
 
         $timer->time = $this->request->getPost("time");
         $timer->stop = $this->request->getPost("stop");
+        $timer->day = $this->request->getPost("day");
+        $timer->month = $this->request->getPost("month");
+        $timer->year = $this->request->getPost("year");
+        $timer->total_time = $this->request->getPost("total_time");
 
 
         if (!$timer->save()) {
