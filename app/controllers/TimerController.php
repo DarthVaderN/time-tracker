@@ -12,7 +12,7 @@ class TimerController extends ControllerBase
      */
     public function indexAction()
     {
-        $this->view->users = Users::find();
+        $this->view->users = Users::findFirstByid($this->auth->getId());
         $this->view->holiday = Holiday::find();
         $this->view->total_time_in_month = Late::findFirst();
         $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));

@@ -107,17 +107,32 @@ echo $this->tag->form(
     ]
 );
 ?>
-<?php foreach ($timer as $item){?>
+<?php $total = 0; ?>
+
+<?php foreach ($timer as $item){ ?>
     <div class="form-group">
         <label for="fieldActive" class="col-sm-2 control-label"><?php echo $item->day .'/'.  $item->month .'/'. $item->year?></label>
         <div class="col-sm-10">
             <ul>
-                <li><?php echo $item->time?></li>
-                <li><?php echo $item->stop?></li>
-                <?php echo $this->tag->linkTo(["timer/edit/".$item->id, "Edit users",'class' => 'btn btn-outline-primary']) ?>
+                <li><?php echo $item->time ?></li>
+                <li><?php echo $item->stop ?></li>
+                <li><?php echo $item->total_time ?></li>
+                <?php if ($item->state == 0) { ?>
+                    <li style="color: green">Today not late! It's good</li>
+                <?php } else { ?>
+                    <li style="color: red">Today late! It's bad</li>
+                <?php } ?>
+                <?php $temp = explode(':', $item->total_time);
+                $total += intval($temp[2]); // Add the seconds
+                $total += intval($temp[1]) * 60; // Add the minutes
+                $total += intval($temp[0]) * 60 * 60; // Add the hours
+                ?>
+                <?php echo $this->tag->linkTo(["timer/edit/".$item->id, "Edit users",'style'=>'position: relative;left: 180px;bottom: 61px;','class' => 'btn btn-outline-primary']) ?>
             </ul>
         </div>
     </div>
 <?php } ?>
+<p style="color:blue;font-size: 26px;"> Total time work : <?php echo gmdate("H:i:s", $total) ?></p>
+
 
 <?php echo $this->tag->endForm(); ?>

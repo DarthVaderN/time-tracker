@@ -15,17 +15,7 @@ $loader->registerNamespaces([
     'Timer'                     => $config->application->libraryDir,
     'Timer\Forms'               => $config->application->formsDir
 ]);
-function generateDates($start, $end)
-{
-    $result = [];
 
-    while ($start <= $end) {
-        $result[$start->format('Y')][$start->format('m')][] = $start->format('d');
-        $start->add(new DateInterval('P1D'));
-    }
-
-    return $result;
-}
 $loader->register();
 
 
