@@ -25,10 +25,16 @@
 <?php echo $this->getContent() ?>
 
 <?php foreach ($users as $user){?>
-    <tr>
-        <td>USER : <?php echo $user->name ?></td>
+    <ul>
+        <li>USER : <?php echo $user->name ?></li>
+        <li style="color: darkgreen">Email : <?php echo $user->email ?></li>
+        <?php if ($user->active == 'N') { ?>
+            <li style="color: red">Banned </li>
+        <?php } else { ?>
+            <li style="color: darkgreen">Active users</li>
+        <?php } ?>
+        <li style="color: olive">Profile Name : <?php echo $user->profile->name ?></li>
         <?php echo $this->tag->linkTo(["users/edit/".$user->id, "Edit users",'class' => 'btn btn-outline-primary']) ?>
         <hr>
-        <br>
-    </tr>
+    </ul>
 <?php }?>
