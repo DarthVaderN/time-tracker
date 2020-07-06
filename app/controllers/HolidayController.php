@@ -12,8 +12,11 @@ class HolidayController extends ControllerBase
      */
     public function indexAction()
     {
-        $this->persistent->parameters = null;
+
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
         $this->view->setTemplateBefore('public');
+        $this->view->holidays = Holiday::find();
+
     }
 
     /**
@@ -72,6 +75,8 @@ class HolidayController extends ControllerBase
      */
     public function editAction($id)
     {
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
+        $this->view->setTemplateBefore('public');
         if (!$this->request->isPost()) {
 
             $holiday = Holiday::findFirstByid($id);

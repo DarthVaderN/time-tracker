@@ -38,16 +38,22 @@
 </div>
 
 <div class="form-group">
-    <label for="fieldDateHoliday" class="col-sm-2 control-label">Date Of Holiday</label>
+    <label for="fieldDateHoliday" class="col-sm-2 control-label">Day Of Holiday</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["date_holiday", "type" => "date", "class" => "form-control", "id" => "fieldDateHoliday"]) ?>
+        <?php echo $this->tag->textField(["day", "type" => "date", "class" => "form-control", "id" => "fieldDay"]) ?>
+    </div>
+</div>
+<div class="form-group">
+    <label for="fieldDateHoliday" class="col-sm-2 control-label">Month Of Holiday</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["month", "type" => "date", "class" => "form-control", "id" => "fieldMonth"]) ?>
     </div>
 </div>
 
 <div class="form-group">
     <label for="fieldActive" class="col-sm-2 control-label">Active</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["active", [], "class" => "form-control", "id" => "fieldActive"]) ?>
+        <?php echo $this->tag->selectStatic(["active", [1 => 'N',2 => 'Y'], "class" => "form-control", "id" => "fieldActive"]) ?>
     </div>
 </div>
 

@@ -12,8 +12,8 @@ class LateController extends ControllerBase
      */
     public function indexAction()
     {
-        $this->persistent->parameters = null;
         $this->view->late = Late::find();
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
         $this->view->setTemplateBefore('private');
     }
 
@@ -73,6 +73,8 @@ class LateController extends ControllerBase
      */
     public function editAction($id)
     {
+        $this->view->setVar('logged_in', is_array($this->auth->getIdentity()));
+        $this->view->setTemplateBefore('private');
         if (!$this->request->isPost()) {
 
             $late = Late::findFirstByid($id);
@@ -91,7 +93,8 @@ class LateController extends ControllerBase
 
             $this->tag->setDefault("id", $late->id);
             $this->tag->setDefault("time", $late->time);
-            
+            $this->tag->setDefault("total", $late->total);
+
         }
     }
 
@@ -111,7 +114,8 @@ class LateController extends ControllerBase
 
         $late = new Late();
         $late->time = $this->request->getPost("time");
-        
+        $late->total = $this->request->getPost("total");
+
 
         if (!$late->save()) {
             foreach ($late->getMessages() as $message) {
@@ -165,7 +169,8 @@ class LateController extends ControllerBase
         }
 
         $late->time = $this->request->getPost("time");
-        
+        $late->total = $this->request->getPost("total");
+
 
         if (!$late->save()) {
 
